@@ -1,0 +1,67 @@
+{% extends "layout.html "%} 
+
+
+{% block body %}
+	
+<form class="form-signin" action=" {{url_for('searchbook') }}" method="post">
+
+	<div class="text-center mb-4">
+		<h3 class="h3 mb-3 font-weight-normal">Book Search</h3>
+		<!--  <p>Users can type in the ISBN, title or the author of a book. User can also typed in only part of a title, ISBN, or author name.</p>	-->     
+	</div>
+
+{% if error %}
+	<div class="alert alert-danger" role="alert">
+	 {{error}}
+	</div>
+{% endif %}	
+
+	<div class="form-label-group">    	
+    	<input type="text" name="isbn" class="form-control" placeholder="Enter ISBN" autofocus>
+    	<label for="isbn">ISBN</label>
+  	</div>
+  	
+	<div class="form-label-group">    	
+    	<input type="text" name="title" class="form-control" placeholder="Enter Book Title">
+    	<label for="title">Title</label>
+  	</div>
+
+	<div class="form-label-group">    	
+    	<input type="text" name="author" class="form-control" placeholder="Enter Book Author">
+    	<label for="author">Author</label>
+  	</div>
+		
+	<div class="form-label-group">
+		<button class="btn btn-lg btn-primary btn-block">Search</button>		
+	</div>
+	
+	<div>&nbsp;</div>
+	
+	<div class="text-center mb-4">
+		<h5 class="font-weight-normal">Book Search Result</h5>		     
+	</div>
+	
+	
+	<div class="form-label-group">		
+		<table class="table table-sm table-bordered table-hover">
+		  <thead class="thead-light">
+		    <tr>
+		      <th scope="col">ISBN</th>
+		      <th scope="col">Title</th>
+		    </tr>
+		  </thead>
+		  	{% for book in books%}
+			  <tbody>
+			    <tr>
+			      <th scope="row"><a href="{{ url_for('detailbook', isbn=book.isbn)}}">{{ book.isbn }}</a></th>
+			      <td>{{ book.title }}</td>
+			    </tr>
+			  </tbody>
+			{% endfor %}  
+		</table>
+	</div>
+		
+</form>
+
+{% endblock %}
+

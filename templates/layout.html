@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+		crossorigin="anonymous">
+		
+	<link rel="stylesheet" href="{{ url_for('static', filename='project2.css') }}">
+	
+	
+	<title>
+		Book Review Site
+	</title>
+</head>
+
+<body>	
+	<div class="container">
+			
+		<header>
+			 {% block heading %} 			 
+			   <div class="row">
+			    	<div class="col-12">			    	
+				    	<ul class="nav justify-content-end">					
+							{% if session["user_id"] %}				
+								<li class="nav-item">
+									<a class="nav-link" href="{{url_for('logout') }}">Logout</a>
+								</li>
+								<li class="nav-item">
+								    <a class="nav-link" href="{{url_for('navigatesearchbook') }}">Book Search</a>
+								 </li>
+								 <li class="nav-item">
+								    <a class="nav-link" href="#">Contact Us</a>
+								 </li>
+								 
+							{% endif %}	
+					 	</ul> 			    	
+			    	</div>   
+			  </div>
+			 {%  endblock %}			
+		</header>		
+
+		<section>  
+		  <div class="row">
+		    <div class="col"></div>
+		    <div class="col-8">
+		    	{% block body %} {% endblock %}
+		    </div>
+		    <div class="col"></div>
+		  </div>
+ 		</section>
+  
+	  	<footer>
+		  <div class="row">
+		    <div class="col-12">	    	
+				<p class="mt-5 mb-3 text-muted text-center">&copy;2020 CS50-Project1</p>				
+		    </div>
+		  </div>			
+		</footer>		
+
+	</div>		
+</body>
+</html>

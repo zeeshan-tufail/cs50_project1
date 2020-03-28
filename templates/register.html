@@ -1,0 +1,49 @@
+{% extends "layout.html "%} 
+
+{% block heading %} {%  endblock %}
+
+{% block body %}
+
+<form class="form-signin" action=" {{url_for('register') }}" method="post">
+
+	<div class="text-center mb-4">
+		<h1 class="h3 mb-3 font-weight-normal">User Registration</h1>
+		<p>Users will be able to register and then log in for book reviews.	     
+	</div>
+
+{% if error %}
+	<div class="alert alert-danger" role="alert">
+	 {{error}}
+	</div>
+{% endif %}	
+
+{% if success %}
+	<div class="alert alert-primary" role="alert">
+	 {{success}}
+	</div>
+{% endif %}	
+
+	<div class="form-label-group">    	
+    	<input type="text" name="userName" class="form-control" placeholder="Enter UserName" required autofocus>
+    	<label for="userName">User Name</label>
+  	</div>
+  	
+	<div class="form-label-group">    	
+    	<input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+    	<label for="password">Password</label>
+  	</div>
+  	  	
+	<div class="form-label-group">    	
+    	<input type="password" name="confirmPassword" class="form-control" placeholder="Re-enter Password" required>
+    	<label for="confirmPassword">Re-enter Password</label>
+  	</div>
+		
+	<div class="form-label-group">
+		<button class="btn btn-lg btn-primary btn-block" >Register</button>
+		<a href="/">Sign In</a>
+	</div>
+	
+</form>
+
+{% endblock %}
+

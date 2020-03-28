@@ -1,0 +1,92 @@
+{% extends "layout.html "%} 
+
+
+{% block body %}
+
+	<div class="text-center mb-4">
+		<h3 class="h3 mb-3 font-weight-normal">Book Detail</h3>		     
+	</div>
+	
+	<div class="form-label-group">		
+		<table class="table table-sm table-bordered">
+		  <thead class="thead-light">
+		    <tr>
+		      <th scope="col">Title</th>
+		      <th scope="col">Author</th>
+		      <th scope="col">Year</th>
+		      <th scope="col">ISBN</th>
+		      <th scope="col">Ratings Count</th>
+		      <th scope="col">Average Rating</th>		      		      
+		    </tr>
+		  </thead>		  	
+			  <tbody>
+			    <tr>
+			      <td>{{ book.title }}</td>
+			      <td>{{ book.author }}</td>
+			      <td>{{ book.year }}</td>
+			      <td>{{ book.isbn }}</td>
+			      <td>{{ goodreads["work_ratings_count"] }}</td>
+			      <td>{{ goodreads["average_rating"] }}</td>
+			    </tr>
+			  </tbody>
+		</table>
+	</div>
+	
+	<div class="text-center">
+		<h4 class="font-weight-normal">Add Review</h4>	
+		<span style="color:red; font-weight: bold">Note:- </span> You can add only one review per book.     
+	</div>
+
+	<form class="form-signin" action=" {{url_for('addreview') }}" method="post">
+		<input type="hidden" name="isbn" value="{{ book.isbn }}">
+		
+	{% if error %}
+		<div class="alert alert-danger" role="alert">
+		 {{error}}
+		</div>
+	{% endif %}	
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="rate">Rating</label>
+            <select class="custom-select d-block w-100" id="rate" name="rate" required>
+              <option value="">Choose...</option>
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="col-md-8 mb-3">
+            <label for="review">Write a Reveiw</label>
+            <input type="text" class="form-control" id="review" name="review" placeholder="" required>
+          </div>
+        </div>
+		
+		<div class="row">
+			<div class="col">
+				<button class="btn btn-lg btn-primary btn-block">Add Review</button>		
+			</div>
+		</div>
+	
+</form>
+
+	<div class="text-left mb-4">
+		<h4 class="font-weight-normal">Reviews</h4>	
+		<hr class="mb-4">		    
+	</div>
+
+	{% for review in reviews%}
+		<div class="row">
+			<div class="col">
+				<p>{{review.review}}</p>
+			</div>
+		 </div>
+		<hr class="mb-4">			
+	{% endfor %}		
+	
+	
+{% endblock %}
+
